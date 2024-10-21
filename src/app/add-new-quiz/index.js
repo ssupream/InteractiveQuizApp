@@ -1,0 +1,266 @@
+"use client";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
+
+const AddNewQuiz = ({
+  openQuizDialog,
+  setOpenQuizDialog,
+  loading,
+  quizFormData = {
+    id: "",
+    name: "",
+    questions: [{ question: "", answer: "", alternatives: ["", "", ""] }],
+  },
+  setQuizFormData,
+  handleSaveQuizData,
+  quizData,
+}) => {
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [subcategories, setSubcategories] = useState([]);
+
+  // Function to handle closing the dialog and resetting the form
+  const handleDialogClose = (isOpen) => {
+    setOpenQuizDialog(isOpen);
+    if (!isOpen) {
+      resetForm();
+    }
+  };
+
+  // Reset form to initial state
+  const resetForm = () => {
+    setQuizFormData({
+      id: "",
+      name: "",
+      questions: [{ question: "", answer: "", alternatives: ["", "", ""] }],
+    });
+    setSelectedCategory("");
+    setSubcategories([]);
+  };
+
+  // Handle category change and update form data
+  const handleCategoryChange = (categoryName) => {
+    const selectedCategory = quizData.categories.find(
+      (category) => category.name === categoryName
+    );
+
+    if (selectedCategory) {
+      setSelectedCategory(selectedCategory.name);
+      setQuizFormData({
+        ...quizFormData,
+        id: selectedCategory.id,
+        name: selectedCategory.name,
+      });
+
+      setSubcategories(selectedCategory.subcategories || []);
+    }
+  };
+
+  // Handle subcategory change
+  const handleSubcategoryChange = (subcategoryName) => {
+    const selectedSubcategory = subcategories.find(
+      (subcategory) => subcategory.name === subcategoryName
+    );
+
+    if (selectedSubcategory) {
+      setQuizFormData({
+        ...quizFormData,
+        id: selectedSubcategory.id,
+        name: selectedSubcategory.name,
+      });
+    }
+  };
+
+  // Handle change in alternatives (nested in questions)
+  const handleAlternativeChange = (index, value) => {
+    const updatedQuestions = quizFormData.questions.map((question, qIndex) => {
+      if (qIndex === 0) {
+        // Assuming there's only one question to update here
+        const updatedAlternatives = [...question.alternatives];
+        updatedAlternatives[index] = value;
+        return { ...question, alternatives: updatedAlternatives };
+      }
+      return question;
+    });
+
+    setQuizFormData({ ...quizFormData, questions: updatedQuestions });
+  };
+
+  // Handle change in question text
+  const handleQuestionChange = (event) => {
+    const updatedQuestions = quizFormData.questions.map((question, qIndex) => {
+      if (qIndex === 0) {
+        // Assuming only one question
+        return { ...question, question: event.target.value };
+      }
+      return question;
+    });
+
+    setQuizFormData({ ...quizFormData, questions: updatedQuestions });
+  };
+
+  // Handle change in answer text
+  const handleAnswerChange = (event) => {
+    const updatedQuestions = quizFormData.questions.map((question, qIndex) => {
+      if (qIndex === 0) {
+        // Assuming only one question
+        return { ...question, answer: event.target.value };
+      }
+      return question;
+    });
+
+    setQuizFormData({ ...quizFormData, questions: updatedQuestions });
+  };
+
+  return (
+    <>
+      <div className="mt-2 z-10">
+        <Button
+          variant="outline"
+          className="w-28 border-2 mx-2 border-teal-400 rounded-2xl bg-transparent hover:bg-teal-400 hover:text-violet-800 hover:font-extrabold"
+          onClick={() => setOpenQuizDialog(true)}
+        >
+          Add Quiz +
+        </Button>
+      </div>
+      <Dialog open={openQuizDialog} onOpenChange={handleDialogClose}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle className="">Add new quiz</DialogTitle>
+            <DialogDescription>
+              Add more quizzes to the already existing ones.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="category" className="text-right">
+                Category
+              </Label>
+              <Select
+                value={selectedCategory}
+                onValueChange={handleCategoryChange}
+                className="col-span-3"
+              >
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Select a category" />
+                </SelectTrigger>
+                <SelectContent>
+                  {quizData.categories.map((category) => (
+                    <SelectItem key={category._id} value={category.name}>
+                      {category.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            {subcategories.length > 0 && (
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="subcategory" className="text-right">
+                  Subcategory
+                </Label>
+                <Select
+                  value={subcategories.name}
+                  onValueChange={handleSubcategoryChange}
+                  className="col-span-3 "
+                >
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Select a subcategory" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {subcategories.map((subcategory) => (
+                      <SelectItem
+                        key={subcategory._id}
+                        value={subcategory.name}
+                      >
+                        {subcategory.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
+
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="question" className="text-right">
+                Question
+              </Label>
+              <Input
+                name="question"
+                placeholder="Enter question"
+                value={quizFormData.questions[0].question || ""}
+                onChange={handleQuestionChange}
+                id="question"
+                className="col-span-3"
+              />
+            </div>
+
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="answer" className="text-right">
+                Answer
+              </Label>
+              <Input
+                name="answer"
+                placeholder="Enter answer"
+                value={quizFormData.questions[0].answer || ""}
+                onChange={handleAnswerChange}
+                id="answer"
+                className="col-span-3"
+              />
+            </div>
+
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="alternatives" className="text-right">
+                Alternatives
+              </Label>
+              <div className="col-span-3 grid gap-2">
+                {quizFormData.questions[0].alternatives.map(
+                  (alternative, index) => (
+                    <Input
+                      key={index}
+                      placeholder={`Alternative ${index + 1}`}
+                      value={alternative}
+                      onChange={(event) =>
+                        handleAlternativeChange(index, event.target.value)
+                      }
+                    />
+                  )
+                )}
+              </div>
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button
+              onClick={handleSaveQuizData}
+              type="button"
+              disabled={loading}
+            >
+              {loading ? "Sending..." : "Submit Quiz"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+};
+
+export default AddNewQuiz;

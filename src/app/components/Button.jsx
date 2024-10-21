@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-const Button = ({
+const MyButton = ({
   href,
   backgroundColor,
   buttonText = "click",
@@ -27,4 +27,4 @@ const Button = ({
   );
 };
 
-export default Button;
+export default MyButton;

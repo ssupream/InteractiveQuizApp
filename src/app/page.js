@@ -1,16 +1,10 @@
-"use client";
+import { updateFetchQuizData } from "./fetchData/page";
+import Quiz from "./components/Quiz";
 
-import { useRouter } from "next/navigation";
+const homepage = async () => {
+  const quizData = await updateFetchQuizData();
 
-export default function Index() {
-  const router = useRouter();
+  return <Quiz quizData={quizData} />;
+};
 
-  router.replace("/home");
-
-  // You can also conditionally redirect based on other factors
-  // if (someCondition) {
-  //   router.push('/home');
-  // }
-
-  return null;
-}
+export default homepage;
