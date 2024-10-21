@@ -1,21 +1,19 @@
 "use client";
 
-import { useState } from "react";
 import AddNewQuiz from "../add-new-quiz";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-// Define the initial structure for a question
 const quizCategoriesData = {
   question: "",
   answer: "",
-  alternatives: ["", "", ""], // Placeholder for alternatives
+  alternatives: ["", "", ""],
 };
 
 const initialQuizCategoriesData = {
-  id: "", // This should be the quiz ID you're appending to
-  name: "", // The name of the existing quiz
-  questions: [quizCategoriesData], // New questions to add
+  id: "",
+  name: "",
+  questions: [quizCategoriesData],
 };
 
 const QuizOverview = ({ quizData }) => {
@@ -30,15 +28,13 @@ const QuizOverview = ({ quizData }) => {
     router.refresh();
   }, []);
 
-  // Handle the API call to save quiz data
   const handleSaveQuizData = async () => {
     try {
       setLoading(true);
 
-      // Prepare the data to send to the API
       const updatedQuizFormData = {
         ...quizFormData,
-        id: currentEditedQuizId || quizFormData.id, // Use the current edited quiz ID or form ID
+        id: currentEditedQuizId || quizFormData.id,
       };
 
       const apiResponse = await fetch("/api/add-quiz", {
@@ -52,7 +48,6 @@ const QuizOverview = ({ quizData }) => {
       const result = await apiResponse.json();
 
       if (result?.success) {
-        // Reset the form and close the dialog if successful
         setQuizFormData(initialQuizCategoriesData);
         setOpenQuizDialog(false);
         router.refresh();

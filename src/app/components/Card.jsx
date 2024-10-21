@@ -1,6 +1,5 @@
 import Link from "next/link";
 import randomColor from "randomcolor";
-import { redirect } from "next/navigation";
 
 const Card = ({ directory, category }) => {
   return (

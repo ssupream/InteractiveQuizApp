@@ -82,7 +82,7 @@ const ClientQuiz = ({
   return (
     <div>
       <Navbar links={[{ name: "See solutions?", href: "/solutions" }]} />
-      <div className="m-auto h-screen flex flex-col justify-center bg-black/20">
+      <div className="m-auto h-screen flex flex-col justify-center">
         <div className="max-w-screen-md m-auto w-screen">
           <div className="text-center mb-6">
             <h2 className="text-2xl font-bold">

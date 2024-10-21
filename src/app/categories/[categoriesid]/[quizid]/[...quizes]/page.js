@@ -2,7 +2,6 @@
 
 import ClientQuiz from "@/app/components/ClientQuiz";
 import { fetchQuizData } from "@/app/fetchData/page";
-import { useState } from "react";
 
 const QuizPage = async ({ params }) => {
   const data = await fetchQuizData();
@@ -23,15 +22,17 @@ const QuizPage = async ({ params }) => {
   const quizIndex = params.quizes[1];
 
   return (
-    <div className="m-auto max-w-screen-xl">
-      <ClientQuiz
-        questions={quizQuestions.questions}
-        categoryId={categoryId}
-        subcategoryId={quizQuestions.id}
-        quizCategory={quizQuestions.name}
-        quizIndex={quizIndex}
-        clientScore={score}
-      />
+    <div className="bg-black/20">
+      <div className="m-auto max-w-screen-xl">
+        <ClientQuiz
+          questions={quizQuestions.questions}
+          categoryId={categoryId}
+          subcategoryId={quizQuestions.id}
+          quizCategory={quizQuestions.name}
+          quizIndex={quizIndex}
+          clientScore={score}
+        />
+      </div>
     </div>
   );
 };
