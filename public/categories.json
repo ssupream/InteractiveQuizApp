@@ -1,0 +1,62 @@
+[
+  {
+    "id": "general_knowledge",
+    "name": "General Knowledge",
+    "subcategories": [
+      { "id": "gk_history", "name": "History" },
+      { "id": "gk_geography", "name": "Geography" },
+      { "id": "gk_science", "name": "Science" },
+      { "id": "gk_technology", "name": "Technology" },
+      { "id": "gk_arts_lit", "name": "Arts and Literature" },
+      { "id": "gk_sports", "name": "Sports" },
+      { "id": "gk_movies_tv", "name": "Movies and TV" }
+    ]
+  },
+  {
+    "id": "specific_topics",
+    "name": "Specific Topics",
+    "subcategories": [
+      { "id": "st_music", "name": "Music" },
+      { "id": "st_video_games", "name": "Video Games" },
+      { "id": "st_anime", "name": "Anime" },
+      { "id": "st_mythology", "name": "Mythology" },
+      { "id": "st_philosophy", "name": "Philosophy" },
+      { "id": "st_religion", "name": "Religion" },
+      { "id": "st_politics", "name": "Politics" }
+    ]
+  },
+  {
+    "id": "fun_and_trivia",
+    "name": "Fun and Trivia",
+    "subcategories": [
+      { "id": "ft_jokes_riddles", "name": "Jokes and Riddles" },
+      { "id": "ft_pop_culture", "name": "Pop Culture" },
+      { "id": "ft_trivia", "name": "Trivia" },
+      { "id": "ft_word_games", "name": "Word Games" },
+      { "id": "ft_math_puzzles", "name": "Math Puzzles" }
+    ]
+  },
+  {
+    "id": "educational",
+    "name": "Educational",
+    "subcategories": [
+      { "id": "edu_language", "name": "Language Learning" },
+      { "id": "edu_coding", "name": "Coding" },
+      { "id": "edu_financial", "name": "Financial Literacy" },
+      { "id": "edu_health", "name": "Health and Wellness" }
+    ]
+  },
+  {
+    "id": "niche_categories",
+    "name": "Niche Categories",
+    "subcategories": [
+      { "id": "nc_astronomy", "name": "Astronomy" },
+      { "id": "nc_chemistry", "name": "Chemistry" },
+      { "id": "nc_biology", "name": "Biology" },
+      { "id": "nc_psychology", "name": "Psychology" },
+      { "id": "nc_law", "name": "Law" },
+      { "id": "nc_economics", "name": "Economics" },
+      { "id": "nc_cooking", "name": "Cooking" }
+    ]
+  }
+]
