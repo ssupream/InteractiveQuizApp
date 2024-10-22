@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 # Quiz App
 
 Welcome to the **Quiz App** built with **Next.js**! This app allows users to take quizzes, track their scores, and enjoy an interactive learning experience. It utilizes server-side rendering for optimal performance and user experience.
