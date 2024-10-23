@@ -4,7 +4,7 @@ import QuizOverview from "./AddQuiz";
 
 const Quiz = ({ quizData }) => {
   return (
-    <>
+    <div id="my-div" style={{ display: "none" }}>
       <QuizOverview quizData={quizData} />
 
       <div className="flex flex-col gap-20 justify-around max-w-screen-xl mx-auto px-4 md:gap-6 md:h-screen ">
@@ -42,7 +42,7 @@ const Quiz = ({ quizData }) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

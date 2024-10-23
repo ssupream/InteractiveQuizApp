@@ -37,7 +37,6 @@ const AddNewQuiz = ({
   const [selectedCategory, setSelectedCategory] = useState("");
   const [subcategories, setSubcategories] = useState([]);
 
-  // Function to handle closing the dialog and resetting the form
   const handleDialogClose = (isOpen) => {
     setOpenQuizDialog(isOpen);
     if (!isOpen) {
@@ -45,7 +44,6 @@ const AddNewQuiz = ({
     }
   };
 
-  // Reset form to initial state
   const resetForm = () => {
     setQuizFormData({
       id: "",
@@ -56,7 +54,6 @@ const AddNewQuiz = ({
     setSubcategories([]);
   };
 
-  // Handle category change and update form data
   const handleCategoryChange = (categoryName) => {
     const selectedCategory = quizData.categories.find(
       (category) => category.name === categoryName
@@ -74,7 +71,6 @@ const AddNewQuiz = ({
     }
   };
 
-  // Handle subcategory change
   const handleSubcategoryChange = (subcategoryName) => {
     const selectedSubcategory = subcategories.find(
       (subcategory) => subcategory.name === subcategoryName
@@ -89,11 +85,9 @@ const AddNewQuiz = ({
     }
   };
 
-  // Handle change in alternatives (nested in questions)
   const handleAlternativeChange = (index, value) => {
     const updatedQuestions = quizFormData.questions.map((question, qIndex) => {
       if (qIndex === 0) {
-        // Assuming there's only one question to update here
         const updatedAlternatives = [...question.alternatives];
         updatedAlternatives[index] = value;
         return { ...question, alternatives: updatedAlternatives };
@@ -104,11 +98,9 @@ const AddNewQuiz = ({
     setQuizFormData({ ...quizFormData, questions: updatedQuestions });
   };
 
-  // Handle change in question text
   const handleQuestionChange = (event) => {
     const updatedQuestions = quizFormData.questions.map((question, qIndex) => {
       if (qIndex === 0) {
-        // Assuming only one question
         return { ...question, question: event.target.value };
       }
       return question;
@@ -117,11 +109,9 @@ const AddNewQuiz = ({
     setQuizFormData({ ...quizFormData, questions: updatedQuestions });
   };
 
-  // Handle change in answer text
   const handleAnswerChange = (event) => {
     const updatedQuestions = quizFormData.questions.map((question, qIndex) => {
       if (qIndex === 0) {
-        // Assuming only one question
         return { ...question, answer: event.target.value };
       }
       return question;
@@ -164,7 +154,7 @@ const AddNewQuiz = ({
                 </SelectTrigger>
                 <SelectContent>
                   {quizData.categories.map((category) => (
-                    <SelectItem key={category._id} value={category.name}>
+                    <SelectItem key={category.id} value={category.name}>
                       {category.name}
                     </SelectItem>
                   ))}

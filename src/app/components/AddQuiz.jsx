@@ -2,7 +2,7 @@
 
 import AddNewQuiz from "../add-new-quiz";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
 const quizCategoriesData = {
   question: "",
@@ -23,10 +23,6 @@ const QuizOverview = ({ quizData }) => {
 
   const [currentEditedQuizId, setCurrentEditedQuizId] = useState(null);
   const router = useRouter();
-
-  useEffect(() => {
-    router.refresh();
-  }, []);
 
   const handleSaveQuizData = async () => {
     try {

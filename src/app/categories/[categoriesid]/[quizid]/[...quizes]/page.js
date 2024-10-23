@@ -1,5 +1,3 @@
-"use client";
-
 import ClientQuiz from "@/app/components/ClientQuiz";
 import { fetchQuizData } from "@/app/fetchData/page";
 

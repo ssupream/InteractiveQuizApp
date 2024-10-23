@@ -18,7 +18,7 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "Quiz App 1",
+  title: "Next Quiz",
   description: "My next Quiz app",
 };
 

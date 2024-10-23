@@ -3,11 +3,7 @@ import randomColor from "randomcolor";
 
 const Card = ({ directory, category }) => {
   return (
-    <Link
-      key={category.id}
-      href={`${directory}/${category.id}`}
-      className="pointer "
-    >
+    <Link href={`${directory}/${category.id}`} className="pointer">
       <div
         className="flex flex-col justify-center items-center h-60 rounded-2xl bg-black/20 shadow-md hover:brightness-125"
         style={{

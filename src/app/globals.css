@@ -7,6 +7,10 @@
   color: rgb(112 26 117);
 }
 
+#my-div {
+  display: block !important;
+}
+
 body {
   background-color: rgb(46 16 101);
   text-emphasis-color: pink;
