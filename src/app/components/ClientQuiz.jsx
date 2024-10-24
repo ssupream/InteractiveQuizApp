@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import randomColor from "randomcolor";
-import MyButton from "@/app/components/Button";
 import Navbar from "./Navbar";
-import { MdNavigateNext } from "react-icons/md";
 import Results from "./Results";
+import QuizCard from "./QuizCard";
+import QuizAnswerResult from "./QuizAnswerResult";
 
 const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -19,15 +19,15 @@ const ClientQuiz = ({
   questions,
   categoryId,
   subcategoryId,
-  quizIndex = 0,
+  quizIndex,
   quizCategory,
-  clientScore,
+  score,
+  setScore,
 }) => {
   const [quizData, setQuizData] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(Number(quizIndex));
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
-  const [score, setScore] = useState(clientScore);
 
   useEffect(() => {
     const shuffledData = questions.map((quiz) => ({
@@ -84,73 +84,38 @@ const ClientQuiz = ({
       <Navbar links={[{ name: "See solutions?", href: "/solutions" }]} />
       <div className="m-auto h-screen flex flex-col justify-center">
         <div className="max-w-screen-md m-auto w-screen">
-          <div className="text-center mb-6">
+          <div
+            className={`absolute bottom-2 left-7 p-4 rounded-3xl text-center mb-6 bg-teal-500 text-violet-950 ${
+              score === 0 ? "hidden" : ""
+            }`}
+          >
             <h2 className="text-2xl font-bold">
-              Score: {score} / {quizData.length}
+              {score === 0
+                ? null
+                : score === 1
+                ? `${score} point of ${quizData.length}`
+                : `${score} points / ${quizData.length}`}
             </h2>
           </div>
 
-          <div
+          <QuizCard
             key={currentIndex}
-            className="rounded-3xl shadow-md text-lg hover:brightness-75 p-6 my-4 "
-            style={{
-              backgroundColor: currentQuiz.backgroundColor,
-            }}
-          >
-            <h1 className="text-2xl mb-4 w-fit font-bold drop-shadow-md">{`${quizCategory} quiz`}</h1>
-            <hr />
-            <p className="font-semibold text-xl drop-shadow-md mt-8">
-              {`${currentIndex + 1}. ${currentQuiz.question}`}
-            </p>
-            <div>
-              <div className="flex flex-col">
-                <ol className="my-2 drop-shadow-md">
-                  {currentQuiz.shuffledAnswers.map((answer, answerIndex) => (
-                    <li
-                      key={answerIndex}
-                      className={`text-white/60 drop-shadow-md cursor-pointer p-2 rounded-md border-2 my-3
-                      border-white/60 hover:bg-black/10 hover:text-white ${
-                        selectedAnswer ? "pointer-events-none" : ""
-                      }`}
-                      onClick={() => handleAnswerClick(answer)}
-                    >
-                      {answer}
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </div>
-          </div>
+            currentIndex={currentIndex}
+            selectedAnswer={selectedAnswer}
+            handleAnswerClick={handleAnswerClick}
+            currentQuiz={currentQuiz}
+            quizCategory={quizCategory}
+          ></QuizCard>
 
           {isAnswerCorrect !== null && (
-            <div className="flex justify-between items-center gap-2 mt-10">
-              <h1
-                className={`text-2xl border-2 p-2 rounded-lg font-extralight drop-shadow-md ${
-                  isAnswerCorrect
-                    ? "border-green-600 bg-green-600/20"
-                    : "border-red-600 bg-red-600/20"
-                } h-full`}
-              >
-                <span className="font-semibold">
-                  {isAnswerCorrect ? "Great!" : "Incorrect 😝"}
-                </span>
-                {isAnswerCorrect ? " Keep it up 🤩" : ""}
-              </h1>
-              <MyButton
-                href={`/categories/${categoryId}/${subcategoryId}/quiz/${
-                  currentIndex + 1
-                }/${score}`}
-                buttonText={"Next"}
-                onClick={handleNextQuestion}
-                style={quizData[currentIndex].backgroundColor}
-                shadow={"shadow-2xl"}
-                glow={
-                  "transition-transform duration-300 hover:shadow-yellow-400 hover:shadow-[0_0_10px] hover:scale-105"
-                }
-                icon={<MdNavigateNext />}
-                iconSize={34}
-              />
-            </div>
+            <QuizAnswerResult
+              backgroundColor={currentQuiz.backgroundColor}
+              isAnswerCorrect={isAnswerCorrect}
+              handleNextQuestion={handleNextQuestion}
+              currentIndex={currentIndex}
+              categoryId={categoryId}
+              subcategoryId={subcategoryId}
+            />
           )}
         </div>
       </div>

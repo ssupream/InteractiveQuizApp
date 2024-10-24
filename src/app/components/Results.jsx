@@ -1,5 +1,6 @@
 import MyButton from "@/app/components/Button";
 import { TbReload } from "react-icons/tb";
+import Cookies from "js-cookie";
 
 const Results = ({ score, quizData, categoryId, subcategoryId }) => {
   if (quizData.length === 0) {
@@ -41,12 +42,21 @@ const Results = ({ score, quizData, categoryId, subcategoryId }) => {
         </p>
         <div className="flex justify-around">
           <MyButton
-            href={`/categories/${categoryId}/${subcategoryId}/quiz/${0}/${0}`}
+            onClick={() => Cookies.set("quizScore", 0)}
+            path={`/categories/${categoryId}/${subcategoryId}/quiz/${0}`}
             buttonText={"Retry quiz"}
             icon={<TbReload />}
           />
-          <MyButton href={`/`} buttonText={"Go to the home"} />
-          <MyButton href={`/categories`} buttonText={"Explore categories"} />
+          <MyButton
+            onClick={() => Cookies.set("quizScore", 0)}
+            path={`/`}
+            buttonText={"Go to the home"}
+          />
+          <MyButton
+            onClick={() => Cookies.set("quizScore", 0)}
+            path={`/categories`}
+            buttonText={"Explore categories"}
+          />
         </div>
       </div>
     </div>

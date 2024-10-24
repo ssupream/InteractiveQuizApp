@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -19,7 +20,6 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 
 const AddNewQuiz = ({
   openQuizDialog,
@@ -35,6 +35,7 @@ const AddNewQuiz = ({
   quizData,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedSubcategory, setSelectedSubcategory] = useState("");
   const [subcategories, setSubcategories] = useState([]);
 
   const handleDialogClose = (isOpen) => {
@@ -72,15 +73,16 @@ const AddNewQuiz = ({
   };
 
   const handleSubcategoryChange = (subcategoryName) => {
-    const selectedSubcategory = subcategories.find(
+    const subcategory = subcategories.find(
       (subcategory) => subcategory.name === subcategoryName
     );
 
-    if (selectedSubcategory) {
+    if (subcategory) {
+      setSelectedSubcategory(subcategory.name);
       setQuizFormData({
         ...quizFormData,
-        id: selectedSubcategory.id,
-        name: selectedSubcategory.name,
+        id: subcategory.id,
+        name: subcategory.name,
       });
     }
   };
@@ -168,7 +170,7 @@ const AddNewQuiz = ({
                   Subcategory
                 </Label>
                 <Select
-                  value={subcategories.name}
+                  value={selectedSubcategory}
                   onValueChange={handleSubcategoryChange}
                   className="col-span-3 "
                 >
@@ -177,10 +179,7 @@ const AddNewQuiz = ({
                   </SelectTrigger>
                   <SelectContent>
                     {subcategories.map((subcategory) => (
-                      <SelectItem
-                        key={subcategory._id}
-                        value={subcategory.name}
-                      >
+                      <SelectItem key={subcategory.id} value={subcategory.name}>
                         {subcategory.name}
                       </SelectItem>
                     ))}

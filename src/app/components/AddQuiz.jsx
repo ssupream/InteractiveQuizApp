@@ -2,7 +2,7 @@
 
 import AddNewQuiz from "../add-new-quiz";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const quizCategoriesData = {
   question: "",

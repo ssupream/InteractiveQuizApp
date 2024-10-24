@@ -11,7 +11,7 @@ const QuizPage = async ({ params }) => {
     redirect("/404");
   }
 
-  redirect(`${quizQuestions.id}/quiz/${0}/${0}`);
+  redirect(`${quizQuestions.id}/quiz/${0}/`);
 };
 
 export default QuizPage;
