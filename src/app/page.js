@@ -1,10 +1,10 @@
 import { updateFetchQuizData } from "./fetchData/page";
-import Quiz from "./components/Quiz";
+import QuizApp from "./components/quiz-app/QuizApp";
 
 const homepage = async () => {
   const quizData = await updateFetchQuizData();
 
-  return <Quiz quizData={quizData} />;
+  return <QuizApp quizData={quizData} />;
 };
 
 export default homepage;

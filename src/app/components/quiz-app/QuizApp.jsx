@@ -1,8 +1,10 @@
-import Link from "next/link";
-import Card from "./Card";
-import QuizOverview from "./AddQuiz";
+"use client";
 
-const Quiz = ({ quizData }) => {
+import Link from "next/link";
+import Card from "../Card";
+import QuizOverview from "../add-new-quiz/AddQuiz";
+
+const QuizApp = ({ quizData }) => {
   return (
     <div id="my-div" style={{ display: "none" }}>
       <QuizOverview quizData={quizData} />
@@ -46,4 +48,4 @@ const Quiz = ({ quizData }) => {
   );
 };
 
-export default Quiz;
+export default QuizApp;

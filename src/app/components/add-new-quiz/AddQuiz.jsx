@@ -1,8 +1,8 @@
 "use client";
 
-import AddNewQuiz from "../add-new-quiz";
+import HandleAddNewQuiz from "./HandleAddNewQuiz";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import React, { useState } from "react";
 
 const quizCategoriesData = {
   question: "",
@@ -59,7 +59,7 @@ const QuizOverview = ({ quizData }) => {
 
   return (
     <div className="px-2 flex flex-col gap-10 absolute z-10">
-      <AddNewQuiz
+      <HandleAddNewQuiz
         openQuizDialog={openQuizDialog}
         setOpenQuizDialog={setOpenQuizDialog}
         loading={loading}

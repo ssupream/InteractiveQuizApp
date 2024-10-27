@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import randomColor from "randomcolor";
-import Navbar from "./Navbar";
+import Navbar from "../Navbar";
 import Results from "./Results";
-import QuizCard from "./QuizCard";
+import QuizCard from "../QuizCard";
 import QuizAnswerResult from "./QuizAnswerResult";
 
 const shuffleArray = (array) => {

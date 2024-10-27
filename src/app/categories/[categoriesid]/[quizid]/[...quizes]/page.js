@@ -1,5 +1,5 @@
 import { fetchQuizData } from "@/app/fetchData/page";
-import HandleScore from "@/app/components/HandleScore";
+import HandleScore from "@/app/components/quiz-app/HandleScore";
 
 const QuizPage = async ({ params }) => {
   const data = await fetchQuizData();

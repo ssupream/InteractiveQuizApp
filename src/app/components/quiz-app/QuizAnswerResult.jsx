@@ -1,4 +1,4 @@
-import MyButton from "./Button";
+import MyButton from "../Button";
 import { MdNavigateNext } from "react-icons/md";
 
 export default function QuizAnswerResult({
