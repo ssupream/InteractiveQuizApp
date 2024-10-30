@@ -16,9 +16,9 @@ function QuizCard({
 
   return (
     <div
-      className="rounded-3xl shadow-md text-lg hover:brightness-75 p-6 my-4"
+      className="rounded-3xl shadow-md text-lg p-6 my-4"
       style={{
-        backgroundColor: currentQuiz.backgroundColor,
+        backgroundColor: currentQuiz.backgroundColor || "rgba(0, 0, 0, 0.4)",
       }}
     >
       <h1 className="text-2xl mb-4 w-fit font-bold drop-shadow-md ">

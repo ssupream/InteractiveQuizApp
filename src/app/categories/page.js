@@ -20,7 +20,7 @@ const Categories = async () => {
                 category.subcategories.map((subcategory) => (
                   <Card
                     key={subcategory.id}
-                    directory={`/categories/${category.id}`}
+                    directory={category.id}
                     category={subcategory}
                   />
                 ))}

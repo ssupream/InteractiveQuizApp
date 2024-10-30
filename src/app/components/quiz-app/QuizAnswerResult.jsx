@@ -24,7 +24,7 @@ export default function QuizAnswerResult({
         {isAnswerCorrect ? " Keep it up 🤩" : ""}
       </h1>
       <MyButton
-        path={`/categories/${categoryId}/${subcategoryId}/quiz/${
+        path={`/categories/${categoryId}/${subcategoryId + "-quiz"}/${
           currentIndex + 1
         }/`}
         buttonText={"Next"}

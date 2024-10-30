@@ -37,7 +37,7 @@ const QuizApp = ({ quizData }) => {
             {quizData.categories.map((category) => (
               <Card
                 key={category.id}
-                directory={"/categories"}
+                directory={`/categories/${category.id}`}
                 category={category}
               />
             ))}

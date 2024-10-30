@@ -3,10 +3,14 @@ import HandleScore from "@/app/components/quiz-app/HandleScore";
 
 const QuizPage = async ({ params }) => {
   const data = await fetchQuizData();
+  console.log(params);
 
   const categoryId = params.categoriesid;
-  const quizId = params.quizid;
+  const rawQuizId = params.quizid;
+  const quizId = rawQuizId.split("-")[0];
+
   const quizQuestions = data.quizCategories.find((quiz) => quiz.id === quizId);
+  console.log(quizQuestions);
 
   if (!quizQuestions || !data) {
     return (
@@ -16,7 +20,7 @@ const QuizPage = async ({ params }) => {
     );
   }
 
-  const quizIndex = params.quizes[1];
+  const quizIndex = params.quizes;
   const initialScore = 0;
 
   return (

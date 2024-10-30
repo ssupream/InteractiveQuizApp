@@ -1,17 +1,9 @@
-import { fetchQuizData } from "@/app/fetchData/page";
-import { redirect } from "next/navigation";
-
-const QuizPage = async ({ params }) => {
-  const data = await fetchQuizData();
-
-  const quizId = params.quizid;
-  const quizQuestions = data.quizCategories.find((quiz) => quiz.id === quizId);
-
-  if (!quizQuestions) {
-    redirect("/404");
-  }
-
-  redirect(`${quizQuestions.id}/quiz/${0}/`);
+const QuizPage = async () => {
+  return (
+    <div className="flex justify-center items-center w-screen h-screen">
+      <h1 className="text-2xl">Work in progress... 🚧</h1>
+    </div>
+  );
 };
 
 export default QuizPage;

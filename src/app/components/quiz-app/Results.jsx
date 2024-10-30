@@ -43,7 +43,7 @@ const Results = ({ score, quizData, categoryId, subcategoryId }) => {
         <div className="flex justify-around">
           <MyButton
             onClick={() => Cookies.set("quizScore", 0)}
-            path={`/categories/${categoryId}/${subcategoryId}/quiz/${0}`}
+            path={`/categories/${categoryId}/${subcategoryId + "-quiz"}/${0}`}
             buttonText={"Retry quiz"}
             icon={<TbReload />}
           />

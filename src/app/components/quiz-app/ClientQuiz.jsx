@@ -6,6 +6,7 @@ import Navbar from "../Navbar";
 import Results from "./Results";
 import QuizCard from "../QuizCard";
 import QuizAnswerResult from "./QuizAnswerResult";
+import RandomColorSetter from "../utils/RandomColorSetter";
 
 const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -30,15 +31,14 @@ const ClientQuiz = ({
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
 
   useEffect(() => {
-    const shuffledData = questions.map((quiz) => ({
-      ...quiz,
-      shuffledAnswers: shuffleArray([quiz.answer, ...quiz.alternatives]),
-      backgroundColor: randomColor({
-        luminosity: "dark",
-        format: "rgba",
-        alpha: 0.5,
-      }),
-    }));
+    const shuffledData = questions.map((quiz) => {
+      const { backgroundColor } = RandomColorSetter(quiz._id);
+      return {
+        ...quiz,
+        shuffledAnswers: shuffleArray([quiz.answer, ...quiz.alternatives]),
+        backgroundColor,
+      };
+    });
     setQuizData(shuffledData);
   }, [questions]);
 

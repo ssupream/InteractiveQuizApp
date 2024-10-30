@@ -4,6 +4,7 @@ import { fetchQuizData } from "@/app/fetchData/page";
 
 const categoriesPage = async ({ params }) => {
   const data = await fetchQuizData();
+  console.log(params);
 
   const categoryId = params.categoriesid;
   const category = data.categories.find((cat) => cat.id === categoryId);
@@ -39,7 +40,9 @@ const categoriesPage = async ({ params }) => {
             {subcategories.map((subcategory) => (
               <Card
                 key={subcategory.id}
-                directory={`/categories/${category.id}`}
+                directory={`/categories/${category.id}/${
+                  subcategory.id + "-quiz"
+                }/0`}
                 category={subcategory}
               />
             ))}
